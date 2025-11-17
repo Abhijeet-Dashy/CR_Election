@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CR ELECTION SYSTEM // 2025</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700;800;900&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: #0a0e12;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(10, 14, 18, 0.85);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(138, 180, 82, 0.2);
+        }
+
+        .nav-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 24px;
+            font-weight: 900;
+            color: #8ab452;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo::before {
+            content: '◆';
+            font-size: 20px;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+
+        .nav-link {
+            color: #a0a0a0;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #8ab452;
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: #8ab452;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .btn-nav {
+            padding: 12px 30px;
+            background: transparent;
+            border: 2px solid #8ab452;
+            color: #8ab452;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+        }
+
+        .btn-nav:hover {
+            background: #8ab452;
+            color: #0a0e12;
+            box-shadow: 0 0 20px rgba(138, 180, 82, 0.5);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: linear-gradient(180deg, #0a0e12 0%, #1a2028 100%);
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(138, 180, 82, 0.03) 2px, rgba(138, 180, 82, 0.03) 4px),
+                repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(138, 180, 82, 0.03) 2px, rgba(138, 180, 82, 0.03) 4px);
+            z-index: 1;
+        }
+
+        .scan-line {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #8ab452, transparent);
+            animation: scan 4s linear infinite;
+            z-index: 2;
+        }
+
+        @keyframes scan {
+            0% {
+                top: 0;
+            }
+            100% {
+                top: 100%;
+            }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 3;
+            text-align: center;
+            padding: 0 40px;
+        }
+
+        .status-text {
+            font-size: 12px;
+            color: #8ab452;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .status-text::before {
+            content: '> ';
+            color: #8ab452;
+        }
+
+        .hero-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 100px;
+            font-weight: 900;
+            margin-bottom: 20px;
+            color: #ffffff;
+            text-transform: uppercase;
+            letter-spacing: 10px;
+            text-shadow: 0 0 30px rgba(138, 180, 82, 0.3);
+            line-height: 1.1;
+        }
+
+        .hero-subtitle {
+            font-size: 36px;
+            font-weight: 300;
+            color: #a0a0a0;
+            margin-bottom: 50px;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+        }
+
+        .hero-subtitle span {
+            color: #8ab452;
+            font-weight: 700;
+        }
+
+        .hero-cta {
+            display: inline-flex;
+            gap: 20px;
+        }
+
+        .btn-primary {
+            padding: 20px 50px;
+            background: #8ab452;
+            color: #0a0e12;
+            border: none;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            clip-path: polygon(15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%, 0 15px);
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary:hover {
+            background: #9fc961;
+            box-shadow: 0 0 30px rgba(138, 180, 82, 0.6);
+            transform: translateY(-3px);
+        }
+
+        .btn-secondary {
+            padding: 20px 50px;
+            background: transparent;
+            color: #8ab452;
+            border: 2px solid #8ab452;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            clip-path: polygon(15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%, 0 15px);
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(138, 180, 82, 0.1);
+            border-color: #9fc961;
+            color: #9fc961;
+        }
+
+        .system-status {
+            position: absolute;
+            top: 150px;
+            left: 40px;
+            z-index: 3;
+        }
+
+        .status-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+            font-size: 13px;
+            color: #606060;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .status-indicator {
+            width: 8px;
+            height: 8px;
+            background: #8ab452;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #8ab452;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.3;
+            }
+        }
+
+        .status-value {
+            color: #8ab452;
+            font-weight: 700;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 150px 40px;
+            background: #0f1419;
+            position: relative;
+        }
+
+        .features::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 1px;
+            height: 100%;
+            background: linear-gradient(180deg, transparent, rgba(138, 180, 82, 0.2), transparent);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 100px;
+        }
+
+        .section-label {
+            font-size: 12px;
+            color: #8ab452;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 60px;
+            font-weight: 900;
+            color: #ffffff;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+        }
+
+        .features-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+        }
+
+        .feature-card {
+            background: rgba(138, 180, 82, 0.03);
+            border: 1px solid rgba(138, 180, 82, 0.2);
+            padding: 50px 40px;
+            position: relative;
+            transition: all 0.4s ease;
+            clip-path: polygon(20px 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%, 0 20px);
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(138, 180, 82, 0.1), transparent);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .feature-card:hover::before {
+            opacity: 1;
+        }
+
+        .feature-card:hover {
+            border-color: #8ab452;
+            transform: translateY(-10px);
+            box-shadow: 0 10px 40px rgba(138, 180, 82, 0.2);
+        }
+
+        .feature-number {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 14px;
+            color: #8ab452;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .feature-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .feature-description {
+            font-size: 16px;
+            color: #808080;
+            line-height: 1.8;
+            letter-spacing: 1px;
+        }
+
+        /* Stats Section */
+        .stats {
+            padding: 150px 40px;
+            background: #0a0e12;
+            position: relative;
+        }
+
+        .stats-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+        }
+
+        .stat-card {
+            background: rgba(138, 180, 82, 0.05);
+            border: 1px solid rgba(138, 180, 82, 0.2);
+            padding: 60px 40px;
+            text-align: center;
+            position: relative;
+            clip-path: polygon(15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%, 0 15px);
+            transition: all 0.4s ease;
+        }
+
+        .stat-card:hover {
+            border-color: #8ab452;
+            background: rgba(138, 180, 82, 0.08);
+            transform: translateY(-5px);
+        }
+
+        .stat-number {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 72px;
+            font-weight: 900;
+            color: #8ab452;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: #808080;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 200px 40px;
+            background: #0f1419;
+            text-align: center;
+            position: relative;
+        }
+
+        .cta-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 60px;
+            font-weight: 900;
+            color: #ffffff;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+        }
+
+        .cta-subtitle {
+            font-size: 24px;
+            color: #808080;
+            margin-bottom: 60px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        /* Footer */
+        .footer {
+            padding: 60px 40px;
+            background: #0a0e12;
+            border-top: 1px solid rgba(138, 180, 82, 0.2);
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-text {
+            font-size: 12px;
+            color: #606060;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 40px;
+        }
+
+        .footer-link {
+            color: #606060;
+            text-decoration: none;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .footer-link:hover {
+            color: #8ab452;
+        }
+
+        .corner-decoration {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            border: 2px solid #8ab452;
+        }
+
+        .corner-decoration.top-left {
+            top: 20px;
+            left: 20px;
+            border-right: none;
+            border-bottom: none;
+        }
+
+        .corner-decoration.top-right {
+            top: 20px;
+            right: 20px;
+            border-left: none;
+            border-bottom: none;
+        }
+
+        .corner-decoration.bottom-left {
+            bottom: 20px;
+            left: 20px;
+            border-right: none;
+            border-top: none;
+        }
+
+        .corner-decoration.bottom-right {
+            bottom: 20px;
+            right: 20px;
+            border-left: none;
+            border-top: none;
+        }
+
+        @media (max-width: 1200px) {
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 50px;
+                letter-spacing: 5px;
+            }
+
+            .hero-subtitle {
+                font-size: 20px;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-menu {
+                display: none;
+            }
+
+            .system-status {
+                display: none;
+            }
+
+            .hero-cta {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .btn-primary, .btn-secondary {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-container">
+            <div class="logo">◆ CR ELECTION</div>
+            <ul class="nav-menu">
+                <li><a href="#features" class="nav-link">System</a></li>
+                <li><a href="adminauth.html" class="nav-link">Analytics</a></li>
+                <li><a href="#candidates" class="nav-link">Candidates</a></li>
+                <li><a href="#about" class="nav-link">Protocol</a></li>
+            </ul>
+            <button class="btn-nav">INITIALIZE</button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="scan-line"></div>
+        
+        <div class="system-status">
+            <div class="status-item">
+                <div class="status-indicator"></div>
+                <span>PARALLEL_ENGINES:</span>
+                <span class="status-value">ONLINE</span>
+            </div>
+            <div class="status-item">
+                <div class="status-indicator"></div>
+                <span>NEURAL_SCOPE:</span>
+                <span class="status-value">SYNCED</span>
+            </div>
+            <div class="status-item">
+                <div class="status-indicator"></div>
+                <span>SHIELDING_LAYERS:</span>
+                <span class="status-value">ACTIVE</span>
+            </div>
+            <div class="status-item">
+                <div class="status-indicator"></div>
+                <span>READINESS_STATUS:</span>
+                <span class="status-value">100.000</span>
+            </div>
+        </div>
+
+        <div class="hero-content">
+            <div class="status-text">CR ELECTION PROTOCOL INITIALIZED</div>
+            <h1 class="hero-title">SEE WHAT'S<br>HAPPENING</h1>
+            <p class="hero-subtitle">DECIDE WHAT <span>HAPPENS NEXT</span></p>
+            <div class="hero-cta">
+                <a href="#vote" class="btn-primary">START VOTING</a>
+                <a href="#features" class="btn-secondary">EXPLORE SYSTEM</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="section-header">
+            <div class="section-label">// SYSTEM CAPABILITIES</div>
+            <h2 class="section-title">CORE FEATURES</h2>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-number">// 01</div>
+                <h3 class="feature-title">SECURE PROTOCOL</h3>
+                <p class="feature-description">Military-grade encryption ensures complete vote confidentiality and tamper-proof data integrity throughout the electoral process.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-number">// 02</div>
+                <h3 class="feature-title">REAL-TIME ANALYTICS</h3>
+                <p class="feature-description">Live data streaming provides instant vote counting with transparent results accessible immediately upon voting closure.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-number">// 03</div>
+                <h3 class="feature-title">CANDIDATE PROFILES</h3>
+                <p class="feature-description">Comprehensive manifestos and detailed profiles enable informed decision-making for all participating students.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-number">// 04</div>
+                <h3 class="feature-title">INTUITIVE INTERFACE</h3>
+                <p class="feature-description">Advanced UI design optimized for seamless voting experience across all devices and platforms.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-number">// 05</div>
+                <h3 class="feature-title">VERIFICATION SYSTEM</h3>
+                <p class="feature-description">Sophisticated algorithms prevent duplicate voting and ensure absolute fairness in the electoral process.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-number">// 06</div>
+                <h3 class="feature-title">PARTICIPATION TRACKING</h3>
+                <p class="feature-description">Monitor voter turnout and engagement metrics across all sections with precision analytics.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats" id="stats">
+        <div class="section-header">
+            <div class="section-label">// ELECTION METRICS</div>
+            <h2 class="section-title">SYSTEM STATUS</h2>
+        </div>
+
+        <div class="stats-container">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="stat-number" data-target="500">000</span>
+                    <span class="stat-label">TOTAL STUDENTS</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number" data-target="12">00</span>
+                    <span class="stat-label">CANDIDATES</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number" data-target="3">0</span>
+                    <span class="stat-label">SECTIONS</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number" data-target="85">00</span>
+                    <span class="stat-label">PARTICIPATION %</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section" id="vote">
+        <div class="corner-decoration top-left"></div>
+        <div class="corner-decoration top-right"></div>
+        <div class="corner-decoration bottom-left"></div>
+        <div class="corner-decoration bottom-right"></div>
+        
+        <div class="status-text">// SYSTEM READY</div>
+        <h2 class="cta-title">INITIALIZE VOTING SEQUENCE</h2>
+        <p class="cta-subtitle">Your voice shapes the future</p>
+        <button class="btn-primary" style="font-size: 18px; padding: 25px 60px;">CAST YOUR VOTE →</button>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-text">© 2025 CR ELECTION SYSTEM // ALL RIGHTS RESERVED</div>
+            <div class="footer-links">
+                <a href="#" class="footer-link">Protocol</a>
+                <a href="#" class="footer-link">Candidates</a>
+                <a href="#" class="footer-link">Analytics</a>
+                <a href="#" class="footer-link">Documentation</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Parallax effect
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const heroBg = document.querySelector('.hero-bg');
+            if (heroBg) {
+                heroBg.style.transform = `translateY(${scrolled * 0.5}px)`;
+            }
+        });
+
+        // Animate stats on scroll
+        const animateValue = (element, start, end, duration) => {
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                const value = Math.floor(progress * (end - start) + start);
+                element.textContent = String(value).padStart(3, '0');
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
+        };
+
+        const observerOptions = {
+            threshold: 0.5
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const statNumbers = entry.target.querySelectorAll('.stat-number');
+                    statNumbers.forEach(stat => {
+                        const target = parseInt(stat.getAttribute('data-target'));
+                        animateValue(stat, 0, target, 2000);
+                    });
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        const statsSection = document.querySelector('.stats');
+        if (statsSection) {
+            observer.observe(statsSection);
+        }
+
+        // Fade in animation for feature cards
+        const fadeElements = document.querySelectorAll('.feature-card');
+        
+        const fadeObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }, index * 100);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        fadeElements.forEach(element => {
+            element.style.opacity = '0';
+            element.style.transform = 'translateY(50px)';
+            element.style.transition = 'all 0.8s ease';
+            fadeObserver.observe(element);
+        });
+    </script>
+</body>
+</html>
