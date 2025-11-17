@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>STUDENT ACCESS // CR ELECTION 2025</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700;800;900&display=swap");
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Rajdhani", sans-serif;
+        background: #0a0e12;
+        color: #ffffff;
+        overflow: hidden;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+      }
+
+      /* Animated Background */
+      .bg-grid {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 50px,
+            rgba(138, 180, 82, 0.03) 50px,
+            rgba(138, 180, 82, 0.03) 51px
+          ),
+          repeating-linear-gradient(
+            90deg,
+            transparent,
+            transparent 50px,
+            rgba(138, 180, 82, 0.03) 50px,
+            rgba(138, 180, 82, 0.03) 51px
+          );
+        z-index: 1;
+      }
+
+      .scan-line {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, #8ab452, transparent);
+        animation: scan 4s linear infinite;
+        z-index: 2;
+      }
+
+      @keyframes scan {
+        0% {
+          top: 0;
+          opacity: 0;
+        }
+        5% {
+          opacity: 1;
+        }
+        95% {
+          opacity: 1;
+        }
+        100% {
+          top: 100%;
+          opacity: 0;
+        }
+      }
+
+      .corner-glow {
+        position: absolute;
+        width: 300px;
+        height: 300px;
+        border-radius: 50%;
+        filter: blur(100px);
+        opacity: 0.2;
+      }
+
+      .corner-glow.top-left {
+        top: -100px;
+        left: -100px;
+        background: #8ab452;
+      }
+
+      .corner-glow.bottom-right {
+        bottom: -100px;
+        right: -100px;
+        background: #8ab452;
+      }
+
+      /* Login Container */
+      .login-container {
+        position: relative;
+        z-index: 10;
+        width: 500px;
+        padding: 50px;
+        background: rgba(15, 20, 25, 0.9);
+        border: 1px solid rgba(138, 180, 82, 0.3);
+        clip-path: polygon(
+          30px 0,
+          100% 0,
+          100% calc(100% - 30px),
+          calc(100% - 30px) 100%,
+          0 100%,
+          0 30px
+        );
+        backdrop-filter: blur(10px);
+      }
+
+      .corner-decoration {
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        border: 2px solid #8ab452;
+      }
+
+      .corner-decoration.top-left {
+        top: 15px;
+        left: 15px;
+        border-right: none;
+        border-bottom: none;
+      }
+
+      .corner-decoration.top-right {
+        top: 15px;
+        right: 15px;
+        border-left: none;
+        border-bottom: none;
+      }
+
+      .corner-decoration.bottom-left {
+        bottom: 15px;
+        left: 15px;
+        border-right: none;
+        border-top: none;
+      }
+
+      .corner-decoration.bottom-right {
+        bottom: 15px;
+        right: 15px;
+        border-left: none;
+        border-top: none;
+      }
+
+      /* Header */
+      .login-header {
+        text-align: center;
+        margin-bottom: 40px;
+      }
+
+      .logo {
+        font-family: "Orbitron", sans-serif;
+        font-size: 24px;
+        font-weight: 900;
+        color: #8ab452;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        margin-bottom: 20px;
+      }
+
+      .logo::before {
+        content: "◆";
+        font-size: 20px;
+      }
+
+      .status-text {
+        font-size: 11px;
+        color: #8ab452;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        margin-bottom: 15px;
+        font-weight: 600;
+      }
+
+      .status-text::before {
+        content: "> ";
+      }
+
+      .login-title {
+        font-family: "Orbitron", sans-serif;
+        font-size: 32px;
+        font-weight: 900;
+        color: #ffffff;
+        text-transform: uppercase;
+        letter-spacing: 4px;
+        margin-bottom: 10px;
+      }
+
+      .login-subtitle {
+        font-size: 13px;
+        color: #606060;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+      }
+
+      /* System Status */
+      .system-status {
+        margin-bottom: 35px;
+        padding: 20px;
+        background: rgba(138, 180, 82, 0.05);
+        border: 1px solid rgba(138, 180, 82, 0.2);
+        clip-path: polygon(
+          10px 0,
+          100% 0,
+          100% calc(100% - 10px),
+          calc(100% - 10px) 100%,
+          0 100%,
+          0 10px
+        );
+      }
+
+      .status-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+        font-size: 12px;
+        color: #606060;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+      }
+
+      .status-item:last-child {
+        margin-bottom: 0;
+      }
+
+      .status-indicator {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .status-dot {
+        width: 6px;
+        height: 6px;
+        background: #8ab452;
+        border-radius: 50%;
+        box-shadow: 0 0 10px #8ab452;
+        animation: pulse 2s infinite;
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.3;
+        }
+      }
+
+      .status-value {
+        color: #8ab452;
+        font-weight: 700;
+      }
+
+      /* Form */
+      .login-form {
+        margin-bottom: 25px;
+      }
+
+      .form-group {
+        margin-bottom: 25px;
+      }
+
+      .form-label {
+        display: block;
+        font-size: 11px;
+        color: #8ab452;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin-bottom: 10px;
+        font-weight: 700;
+      }
+
+      .form-input-wrapper {
+        position: relative;
+      }
+
+      .form-input {
+        width: 100%;
+        padding: 15px;
+        padding-left: 45px;
+        background: rgba(138, 180, 82, 0.05);
+        border: 1px solid rgba(138, 180, 82, 0.3);
+        color: #ffffff;
+        font-family: "Rajdhani", sans-serif;
+        font-size: 14px;
+        transition: all 0.3s ease;
+        clip-path: polygon(
+          10px 0,
+          100% 0,
+          100% calc(100% - 10px),
+          calc(100% - 10px) 100%,
+          0 100%,
+          0 10px
+        );
+        letter-spacing: 1px;
+        text-transform: uppercase;
+      }
+
+      .form-input:focus {
+        outline: none;
+        border-color: #8ab452;
+        box-shadow: 0 0 20px rgba(138, 180, 82, 0.2);
+        background: rgba(138, 180, 82, 0.08);
+      }
+
+      .form-input::placeholder {
+        color: #404040;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        font-size: 11px;
+      }
+
+      .input-icon {
+        position: absolute;
+        left: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #8ab452;
+        font-size: 16px;
+      }
+
+      .form-hint {
+        font-size: 11px;
+        color: #606060;
+        margin-top: 8px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      .btn-login {
+        width: 100%;
+        padding: 18px;
+        background: #8ab452;
+        border: none;
+        color: #0a0e12;
+        font-family: "Orbitron", sans-serif;
+        font-size: 14px;
+        font-weight: 900;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        clip-path: polygon(
+          15px 0,
+          100% 0,
+          100% calc(100% - 15px),
+          calc(100% - 15px) 100%,
+          0 100%,
+          0 15px
+        );
+        position: relative;
+        overflow: hidden;
+      }
+
+      .btn-login::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        background: rgba(255, 255, 255, 0.3);
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+        transition: width 0.6s, height 0.6s;
+      }
+
+      .btn-login:hover::before {
+        width: 400px;
+        height: 400px;
+      }
+
+      .btn-login:hover {
+        background: #9fc961;
+        box-shadow: 0 0 30px rgba(138, 180, 82, 0.6);
+        transform: translateY(-2px);
+      }
+
+      .btn-login:active {
+        transform: translateY(0);
+      }
+
+      .btn-text {
+        position: relative;
+        z-index: 1;
+      }
+
+      /* Footer */
+      .login-footer {
+        text-align: center;
+        padding-top: 25px;
+        border-top: 1px solid rgba(138, 180, 82, 0.2);
+      }
+
+      .footer-text {
+        font-size: 11px;
+        color: #404040;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin-bottom: 10px;
+      }
+
+      .footer-link {
+        color: #8ab452;
+        text-decoration: none;
+        transition: all 0.3s ease;
+      }
+
+      .footer-link:hover {
+        color: #9fc961;
+      }
+
+      /* Security Badge */
+      .security-badge {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        padding: 8px 15px;
+        background: rgba(138, 180, 82, 0.1);
+        border: 1px solid rgba(138, 180, 82, 0.3);
+        font-size: 10px;
+        color: #8ab452;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        font-weight: 700;
+        clip-path: polygon(
+          6px 0,
+          100% 0,
+          100% calc(100% - 6px),
+          calc(100% - 6px) 100%,
+          0 100%,
+          0 6px
+        );
+        z-index: 100;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .security-icon {
+        animation: pulse 2s infinite;
+      }
+
+      /* Error Message */
+      .error-message {
+        display: none;
+        padding: 12px;
+        background: rgba(255, 71, 87, 0.1);
+        border: 1px solid rgba(255, 71, 87, 0.3);
+        color: #ff4757;
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 20px;
+        clip-path: polygon(
+          8px 0,
+          100% 0,
+          100% calc(100% - 8px),
+          calc(100% - 8px) 100%,
+          0 100%,
+          0 8px
+        );
+      }
+
+      .error-message.show {
+        display: block;
+        animation: slideIn 0.3s ease;
+      }
+
+      @keyframes slideIn {
+        from {
+          opacity: 0;
+          transform: translateY(-10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Loading State */
+      .btn-login.loading {
+        pointer-events: none;
+        opacity: 0.7;
+      }
+
+      .btn-login.loading .btn-text::after {
+        content: "";
+        display: inline-block;
+        width: 12px;
+        height: 12px;
+        margin-left: 10px;
+        border: 2px solid #0a0e12;
+        border-top-color: transparent;
+        border-radius: 50%;
+        animation: spin 0.6s linear infinite;
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      @media (max-width: 600px) {
+        .login-container {
+          width: 90%;
+          padding: 35px 25px;
+        }
+
+        .login-title {
+          font-size: 24px;
+        }
+
+        .security-badge {
+          position: relative;
+          top: 0;
+          right: 0;
+          margin-bottom: 20px;
+          justify-content: center;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Background -->
+    <div class="bg-grid"></div>
+    <div class="scan-line"></div>
+    <div class="corner-glow top-left"></div>
+    <div class="corner-glow bottom-right"></div>
+
+    <!-- Security Badge -->
+    <div class="security-badge">
+      <span class="security-icon">🔒</span>
+      <span>SECURE CONNECTION</span>
+    </div>
+
+    <!-- Login Container -->
+    <div class="login-container">
+      <div class="corner-decoration top-left"></div>
+      <div class="corner-decoration top-right"></div>
+      <div class="corner-decoration bottom-left"></div>
+      <div class="corner-decoration bottom-right"></div>
+
+      <!-- Header -->
+      <div class="login-header">
+        <div class="logo">◆ CR ELECTION</div>
+        <div class="status-text">STUDENT AUTHENTICATION SYSTEM</div>
+        <h1 class="login-title">VOTER ACCESS</h1>
+        <p class="login-subtitle">Enter your student ID to proceed</p>
+      </div>
+
+      <!-- System Status -->
+      <div class="system-status">
+        <div class="status-item">
+          <div class="status-indicator">
+            <div class="status-dot"></div>
+            <span>VOTING STATUS</span>
+          </div>
+          <span class="status-value">ACTIVE</span>
+        </div>
+        <div class="status-item">
+          <div class="status-indicator">
+            <div class="status-dot"></div>
+            <span>REGISTERED VOTERS</span>
+          </div>
+          <span class="status-value">500</span>
+        </div>
+        <div class="status-item">
+          <div class="status-indicator">
+            <div class="status-dot"></div>
+            <span>TIME REMAINING</span>
+          </div>
+          <span class="status-value">48:00:00</span>
+        </div>
+      </div>
+
+      <!-- Error Message -->
+      <div class="error-message" id="errorMessage">
+        ⚠ Invalid credentials - check SIC and password
+      </div>
+
+      <!-- Login Form -->
+      <form class="login-form" id="loginForm" onsubmit="handleLogin(event)">
+        <div class="form-group">
+          <label class="form-label">STUDENT ID CODE (SIC)</label>
+          <div class="form-input-wrapper">
+            <span class="input-icon">🎓</span>
+            <input
+              type="text"
+              class="form-input"
+              placeholder="Enter SIC"
+              id="sic"
+              required
+              maxlength="15"
+              style="text-transform: none"
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">STUDENT PASSWORD</label>
+          <div class="form-input-wrapper">
+            <span class="input-icon">🔑</span>
+            <input
+              type="password"
+              class="form-input"
+              placeholder="Enter password"
+              id="password"
+              required
+              style="text-transform: none"
+            />
+          </div>
+          <div class="form-hint">Enter your registered password</div>
+        </div>
+
+        <button type="submit" class="btn-login" id="loginBtn">
+          <span class="btn-text">ACCESS VOTING SYSTEM</span>
+        </button>
+      </form>
+
+      <!-- Footer -->
+      <div class="login-footer">
+        <p class="footer-text">
+          Don't know your SIC? Contact
+          <a href="#" class="footer-link">registrar</a>
+        </p>
+        <p class="footer-text" style="margin-top: 10px">
+          <a href="#" class="footer-link">← Back to home</a>
+        </p>
+      </div>
+    </div>
+
+    <script>
+      function handleLogin(event) {
+        event.preventDefault();
+
+        const loginBtn = document.getElementById("loginBtn");
+        const errorMessage = document.getElementById("errorMessage");
+        const sic = document.getElementById("sic").value.trim();
+        const password = document.getElementById("password").value;
+
+        // Hide error message
+        errorMessage.classList.remove("show");
+
+        // Add loading state
+        loginBtn.classList.add("loading");
+        loginBtn.querySelector(".btn-text").textContent = "VERIFYING";
+
+        // Simulate authentication
+        setTimeout(() => {
+          // Validate SIC format (e.g., 2025-A-047, 2025-B-123, 2025-C-089)
+
+          // Hardcoded demo credentials: SIC = "23bcsd95", password = "1234"
+          if (sic.toLowerCase() === "23bcsd95" && password === "1234") {
+            loginBtn.querySelector(".btn-text").textContent = "ACCESS GRANTED";
+
+            setTimeout(() => {
+              // Redirect to voting page
+              window.location.href = "voting.html";
+            }, 500);
+          } else {
+            // Show error
+            errorMessage.classList.add("show");
+            loginBtn.classList.remove("loading");
+            loginBtn.querySelector(".btn-text").textContent =
+              "ACCESS VOTING SYSTEM";
+
+            // Shake animation
+            loginBtn.style.animation = "shake 0.5s";
+            setTimeout(() => {
+              loginBtn.style.animation = "";
+            }, 500);
+          }
+        }, 1500);
+      }
+
+      // Add shake animation
+      const style = document.createElement("style");
+      style.textContent = `
+            @keyframes shake {
+                0%, 100% { transform: translateX(0); }
+                25% { transform: translateX(-10px); }
+                75% { transform: translateX(10px); }
+            }
+        `;
+      document.head.appendChild(style);
+
+      // SIC input formatting removed to keep plain text entry
+
+      // Enter key submit
+      const inputs = document.querySelectorAll(".form-input");
+      inputs.forEach((input) => {
+        input.addEventListener("keypress", function (e) {
+          if (e.key === "Enter") {
+            document
+              .getElementById("loginForm")
+              .dispatchEvent(new Event("submit"));
+          }
+        });
+      });
+
+      // Add focus effect
+      inputs.forEach((input) => {
+        input.addEventListener("focus", function () {
+          this.parentElement.parentElement.querySelector(
+            ".form-label"
+          ).style.color = "#8ab452";
+        });
+
+        input.addEventListener("blur", function () {
+          if (!this.value) {
+            this.parentElement.parentElement.querySelector(
+              ".form-label"
+            ).style.color = "#8ab452";
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
